@@ -1,0 +1,11 @@
+# Dependências do Sistema de Faturamento de Energia
+
+# Framework de testes
+pytest==7.4.3
+pytest-cov==4.1.0
+
+# Interface gráfica (geralmente já vem com Python)
+# tkinter está incluído na instalação padrão do Python
+
+# Type hints
+typing-extensions==4.8.0

@@ -1,0 +1,265 @@
+ESTRUTURA COMPLETA DO PROJETO
+================================================================================
+
+energia-faturamento/
+│
+├── README.md                           # Documentação completa do projeto
+├── requirements.txt                    # Dependências Python
+├── main.py                             # Ponto de entrada da aplicação
+│
+├── domain/                             # Camada de domínio
+│   ├── __init__.py
+│   └── conta.py                        # Entidades: Cliente, Consumo, ContaEnergia
+│
+├── strategies/                         # Strategy Pattern
+│   ├── __init__.py
+│   └── calculo_tarifa.py              # Estratégias de cálculo de tarifa
+│       ├── CalculoTarifaStrategy      # Interface Strategy
+│       ├── CalculoResidencial         # Concrete Strategy
+│       ├── CalculoComercial           # Concrete Strategy
+│       ├── CalculoIndustrial          # Concrete Strategy
+│       └── CalculadoraConta           # Context
+│
+├── decorators/                         # Decorator Pattern
+│   ├── __init__.py
+│   └── conta_decorators.py            # Decoradores de custos
+│       ├── ContaComponent             # Component Interface
+│       ├── ContaBase                  # Concrete Component
+│       ├── ContaDecorator             # Decorator Base
+│       ├── BandeiraDecorator          # Concrete Decorator
+│       ├── ImpostoDecorator           # Concrete Decorator
+│       ├── TaxaIluminacaoDecorator    # Concrete Decorator
+│       └── ContribuicaoMunicipalDecorator
+│
+├── infra/                              # Singleton Pattern
+│   ├── __init__.py
+│   └── tabela_tarifaria.py            # Gerenciador de tabela tarifária
+│       └── TabelaTarifariaManager     # Singleton
+│
+├── app/                                # Interface do usuário
+│   ├── __init__.py
+│   └── interface.py                   # Interface Tkinter
+│       └── SistemaFaturamentoGUI
+│
+└── tests/                              # Testes unitários
+    ├── __init__.py
+    ├── test_strategy.py               # Testes do Strategy Pattern
+    ├── test_decorator.py              # Testes do Decorator Pattern
+    └── test_singleton.py              # Testes do Singleton Pattern
+
+
+================================================================================
+INSTRUÇÕES DE INSTALAÇÃO
+================================================================================
+
+PASSO 1: Criar estrutura de diretórios
+---------------------------------------
+
+Windows (PowerShell):
+```powershell
+mkdir energia-faturamento
+cd energia-faturamento
+mkdir domain, strategies, decorators, infra, app, tests
+```
+
+Linux/Mac:
+```bash
+mkdir energia-faturamento
+cd energia-faturamento
+mkdir domain strategies decorators infra app tests
+```
+
+
+PASSO 2: Criar arquivos
+------------------------
+
+Crie os seguintes arquivos em seus respectivos diretórios:
+
+1. Raiz do projeto:
+   - README.md
+   - requirements.txt
+   - main.py
+
+2. domain/:
+   - __init__.py
+   - conta.py
+
+3. strategies/:
+   - __init__.py
+   - calculo_tarifa.py
+
+4. decorators/:
+   - __init__.py
+   - conta_decorators.py
+
+5. infra/:
+   - __init__.py
+   - tabela_tarifaria.py
+
+6. app/:
+   - __init__.py
+   - interface.py
+
+7. tests/:
+   - __init__.py
+   - test_strategy.py
+   - test_decorator.py
+   - test_singleton.py
+
+
+PASSO 3: Instalar dependências
+-------------------------------
+
+```bash
+pip install -r requirements.txt
+```
+
+Nota: Tkinter geralmente já vem instalado com Python. Se não estiver:
+
+Ubuntu/Debian:
+```bash
+sudo apt-get install python3-tk
+```
+
+Fedora:
+```bash
+sudo dnf install python3-tkinter
+```
+
+macOS (via Homebrew):
+```bash
+brew install python-tk
+```
+
+
+PASSO 4: Executar aplicação
+----------------------------
+
+```bash
+python main.py
+```
+
+
+PASSO 5: Executar testes
+-------------------------
+
+Todos os testes:
+```bash
+python -m pytest tests/ -v
+```
+
+Testes específicos:
+```bash
+python -m pytest tests/test_strategy.py -v
+python -m pytest tests/test_decorator.py -v
+python -m pytest tests/test_singleton.py -v
+```
+
+Com cobertura:
+```bash
+python -m pytest tests/ -v --cov=. --cov-report=html
+```
+
+
+================================================================================
+VERIFICAÇÃO DA INSTALAÇÃO
+================================================================================
+
+Execute os seguintes comandos para verificar se tudo está correto:
+
+1. Verificar estrutura:
+```bash
+tree energia-faturamento/
+```
+
+2. Verificar imports:
+```bash
+python -c "from strategies.calculo_tarifa import CalculoResidencial; print('OK')"
+python -c "from decorators.conta_decorators import ContaBase; print('OK')"
+python -c "from infra.tabela_tarifaria import TabelaTarifariaManager; print('OK')"
+```
+
+3. Verificar Tkinter:
+```bash
+python -c "import tkinter; print('Tkinter OK')"
+```
+
+4. Executar teste rápido:
+```bash
+python -m pytest tests/test_strategy.py::TestCalculoResidencial::test_calculo_faixa1 -v
+```
+
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Problema: "ModuleNotFoundError: No module named 'strategies'"
+Solução: Certifique-se de estar no diretório raiz do projeto e que os
+         arquivos __init__.py existem em todos os diretórios.
+
+Problema: "ImportError: cannot import name 'TabelaTarifariaManager'"
+Solução: Verifique se o arquivo infra/tabela_tarifaria.py existe e está
+         corretamente nomeado.
+
+Problema: "No module named tkinter"
+Solução: Instale python3-tk conforme instruções no Passo 3.
+
+Problema: Testes falhando
+Solução: Execute `python -m pytest tests/ -v -s` para ver output completo
+         e identificar o problema específico.
+
+
+================================================================================
+ARQUIVOS IMPORTANTES
+================================================================================
+
+1. main.py
+   - Ponto de entrada da aplicação
+   - Inicia a interface gráfica
+
+2. README.md
+   - Documentação completa
+   - Justificativa dos padrões
+   - Diagramas UML em Mermaid
+
+3. requirements.txt
+   - Lista de dependências
+   - Versões específicas para compatibilidade
+
+4. tests/
+   - Cobertura completa dos padrões
+   - Demonstra comportamentos-chave
+   - Valida implementação
+
+
+================================================================================
+COMANDOS ÚTEIS
+================================================================================
+
+# Limpar cache Python
+find . -type d -name "__pycache__" -exec rm -r {} +
+find . -type f -name "*.pyc" -delete
+
+# Gerar relatório de cobertura
+python -m pytest tests/ --cov=. --cov-report=html
+# Abrir: htmlcov/index.html
+
+# Executar apenas testes de um padrão
+python -m pytest tests/test_strategy.py -v     # Strategy
+python -m pytest tests/test_decorator.py -v    # Decorator  
+python -m pytest tests/test_singleton.py -v    # Singleton
+
+# Executar teste específico
+python -m pytest tests/test_strategy.py::TestCalculadoraConta::test_troca_dinamica_estrategia -v
+
+
+================================================================================
+OBSERVAÇÕES FINAIS
+================================================================================
+
+- Todos os arquivos devem usar codificação UTF-8
+- Use Python 3.8 ou superior
+- Tkinter é necessário para a interface gráfica
+- Os testes são independentes e podem rodar em qualquer ordem
+- O Singleton é resetado entre testes para evitar interferência
